@@ -1,13 +1,11 @@
 import os
 from argparse import ArgumentParser
+from pathlib import Path
 from shutil import copy2
 from typing import Dict
 
-from mlflow_deploy_cli.utils import (
-    create_dot_env,
-    populate_template,
-    prompt_env_variables,
-)
+from mlflow_deploy_cli.utils import (create_dot_env, populate_template,
+                                     prompt_env_variables)
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -80,11 +78,14 @@ if __name__ == "__main__":
             f"Artifact Store f{args.artifact_store} currently is not supported"
         )
 
-    os.makedirs("build", exist_ok=True)
+    os.makedirs(os.path.join(os.getcwd(), "build"), exist_ok=True)
     populate_template(
-        os.path.join("template", "Dockerfile.template"),
-        os.path.join("build", "Dockerfile"),
+        os.path.join(Path(__file__).parent, "template", "Dockerfile.template"),
+        os.path.join(os.getcwd(), "build", "Dockerfile"),
         placeholders,
     )
-    copy2("docker-compose.yml", os.path.join("build", "docker-compose.yml"))
-    create_dot_env(env_variables, "build")
+    copy2(
+        os.path.join(Path(__file__).parent, "template", "docker-compose.yml"),
+        os.path.join(os.getcwd(), "build", "docker-compose.yml"),
+    )
+    create_dot_env(env_variables, os.path.join(os.getcwd(), "build"))

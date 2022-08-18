@@ -6,9 +6,9 @@ Deploy MLFlow with support for PostgreSQL, Azure Blobs, Amazon S3 and Google Clo
 
 # Usage
 
-`mlflow_deploy_cli --artifact-store '<desired_store>'` _can be [`azure`](https://www.mlflow.org/docs/latest/tracking.html#azure-blob-storage), [`s3`](https://www.mlflow.org/docs/latest/tracking.html#id82), [`gcp`](https://www.mlflow.org/docs/latest/tracking.html#id84) or `local`_
+`python -m mlflow_deploy_cli --artifact-store '<desired_store>'` _can be [`azure`](https://www.mlflow.org/docs/latest/tracking.html#azure-blob-storage), [`s3`](https://www.mlflow.org/docs/latest/tracking.html#id82), [`gcp`](https://www.mlflow.org/docs/latest/tracking.html#id84) or `local`_
 
-`cd dist`
+`cd build`
 
 `docker build . -t mlflow`
 
